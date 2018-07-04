@@ -1,6 +1,6 @@
 import input_data as input_data
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
 
 
 def minist_softmax():
@@ -112,8 +112,7 @@ def conv2d_():
                 print("========")
 
 
-
-def cnn_model_fn(features,labels,mode):
+def cnn_model_fn(features, labels, mode):
     '''
     Model function for CNN
     :param features:
@@ -122,43 +121,43 @@ def cnn_model_fn(features,labels,mode):
     :return:
     '''
     # Input Layer
-    input_layer=tf.reshape(features["x"],[-1,28,28,1])
+    input_layer = tf.reshape(features["x"], [-1, 28, 28, 1])
     # Convolutional Layer
-    conv1=tf.layers.conv2d(
+    conv1 = tf.layers.conv2d(
         inputs=input_layer,
         filters=32,
-        kernel_size=[5,5],
+        kernel_size=[5, 5],
         padding="same",
         activation=tf.nn.relu)
     # Pooling Layer
-    pool1=tf.layers.max_pooling2d(inputs=conv1,pool_size=[2,2],strides=2)
-    conv2=tf.layers.conv2d(
+    pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 2], strides=2)
+    conv2 = tf.layers.conv2d(
         inputs=pool1,
         filters=64,
-        kernel_size=[5,5],
+        kernel_size=[5, 5],
         padding='same',
         activation=tf.nn.relu)
 
-    pool2=tf.layers.max_pooling2d(inputs=conv2,pool_size=[2,2],strides=2)
+    pool2 = tf.layers.max_pooling2d(inputs=conv2, pool_size=[2, 2], strides=2)
 
     # Dense Layer
-    pool2_flat=tf.reshape(pool2,[-1,7*7*64])
-    dense=tf.layers.dense(inputs=pool2_flat,units=1024,activation=tf.nn.relu)
-    dropout=tf.layers.dropout(inputs=dense,rate=0.4,training=mode==tf.estimator.ModeKeys.TRAIN)
+    pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 64])
+    dense = tf.layers.dense(inputs=pool2_flat, units=1024, activation=tf.nn.relu)
+    dropout = tf.layers.dropout(inputs=dense, rate=0.4, training=mode == tf.estimator.ModeKeys.TRAIN)
 
     # Logits Layer
-    logits=tf.layers.dense(inputs=dropout,units=10)
+    logits = tf.layers.dense(inputs=dropout, units=10)
 
-    predictions={
-        "classes":tf.argmax(input=logits,axis=1),
-        "probabilities":tf.nn.softmax(logits,name='softmax_tensor')
+    predictions = {
+        "classes": tf.argmax(input=logits, axis=1),
+        "probabilities": tf.nn.softmax(logits, name='softmax_tensor')
     }
 
-    if mode==tf.estimator.ModeKeys.PREDICT:
-        return tf.estimator.EstimatorSpec(mode=mode,predictions=predictions)
+    if mode == tf.estimator.ModeKeys.PREDICT:
+        return tf.estimator.EstimatorSpec(mode=mode, predictions=predictions)
 
     # Calculate Loss
-    loss=tf.losses.sparse_softmax_cross_entropy(labels=labels,logits=logits)
+    loss = tf.losses.sparse_softmax_cross_entropy(labels=labels, logits=logits)
 
     # Configure the Training Op (for TRAIN mode)
     if mode == tf.estimator.ModeKeys.TRAIN:
@@ -179,7 +178,7 @@ def cnn_model_fn(features,labels,mode):
 def main():
     # Load training and eval data
     # mnist = tf.contrib.learn.datasets.load_dataset("mnist")
-    mnist=input_data.read_data_sets('MINIST_data')
+    mnist = input_data.read_data_sets('MINIST_data')
     train_data = mnist.train.images  # Returns np.array
     train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
     eval_data = mnist.test.images  # Returns np.array
@@ -213,6 +212,7 @@ def main():
         shuffle=False)
     eval_results = mnist_classifier.evaluate(input_fn=eval_input_fn)
     print(eval_results)
+
 
 if __name__ == '__main__':
     # minist_softmax()
