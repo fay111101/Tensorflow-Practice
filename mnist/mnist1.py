@@ -55,6 +55,7 @@ def inference(input_tensor, avg_class, weights1, biases1, weights2, biases2):
                + avg_class.average(biases2)
 
 
+
 def influence1(input_sensor, reuse=False):
     with tf.variable_scope('layer1', reuse=reuse):
         weights = tf.get_variable('weights', [INPUT_NODE, LAYER1_NODE],
@@ -67,6 +68,7 @@ def influence1(input_sensor, reuse=False):
                                   initializer=tf.truncated_normal_initializer(stddev=0.1))
         biases = tf.get_variable('biases', [OUTPUT_NODE], initializer=tf.constant_initializer(0.0))
         layer2 = tf.nn.relu(tf.matmul(layer1, weights) + biases)
+
 
 
 '''训练模型的过程'''
