@@ -1,15 +1,11 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-# from tensorflow.examples.tutorials.mnist import input_data
+import input_data as input_data
 import numpy as np
 import tensorflow as tf
-from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
+
 
 def minist_softmax():
     sess = tf.InteractiveSession
-    minist = read_data_sets('MINIST_data', one_hot=True)
+    minist = input_data.read_data_sets('data', one_hot=True)
     x = tf.placeholder("float", shape=[None, 784])
     y = tf.placeholder("float", shape=[None, 10])
     W = tf.Variable(tf.zeros([784, 10]))
@@ -64,11 +60,14 @@ def conv2d_():
     两层卷积 一个全连接层
     定义卷积
     卷积的权重张量形状是 [5, 5, 1, 32]
+
+
+
     :param x:
     :return:
     '''
     sess = tf.InteractiveSession
-    minist = read_data_sets('MINIST_data', one_hot=True)
+    minist = input_data.read_data_sets('MINIST_data', one_hot=True)
     x = tf.placeholder("float", shape=[None, 784])
     y = tf.placeholder("float", shape=[None, 10])
     W = tf.Variable(tf.zeros([784, 10]))
@@ -183,7 +182,8 @@ def cnn_model_fn(features, labels, mode):
 
 def main():
     # Load training and eval data
-    mnist = read_data_sets('MINIST_data')
+    # mnist = tf.contrib.learn.datasets.load_dataset("mnist")
+    mnist = input_data.read_data_sets('MINIST_data')
     train_data = mnist.train.images  # Returns np.array
     train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
     eval_data = mnist.test.images  # Returns np.array

@@ -52,10 +52,12 @@ def inference(input_tensor, avg_class, weights1, biases1, weights2, biases2):
         layer1 = tf.nn.relu(tf.matmul(input_tensor, avg_class.average(weights1))
                             + avg_class.average(biases1))
         return tf.matmul(layer1, avg_class.average(weights2)) \
-                            + avg_class.average(biases2)
+               + avg_class.average(biases2)
 
 
 '''训练模型的过程'''
+
+
 def train(mnist):
     x = tf.placeholder(tf.float32, [None, INPUT_NODE], name='x-input')  # 维度可以自动算出，也就是样本数
     y_ = tf.placeholder(tf.float32, [None, OUTPUT_NODE], name='y-input')
@@ -131,7 +133,7 @@ def train(mnist):
 
 
 def main(argv=None):
-    mnist = read_data_sets('MINIST_data', one_hot=True)
+    mnist = read_data_sets('data', one_hot=True)
     train(mnist)
 
 
