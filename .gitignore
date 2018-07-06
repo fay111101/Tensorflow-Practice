@@ -3,5 +3,6 @@ tmp/*
 save/*
 .ipynb_checkpoints/*
 .idea/*
-data/*
+*/data/*
 *.pyc
+*/model/*
