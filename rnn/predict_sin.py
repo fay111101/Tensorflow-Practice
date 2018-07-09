@@ -119,8 +119,7 @@ def train(sess, train_X, train_y):
             print('train step: ' + str(i) + ",loss:" + str(l))
 
 
-learn = tf.contrib.learn
-regressor = learn.Estimator(model_fn=lstm_model)
+
 test_start = TRAIN_EXAMPLES * SAMPLE_GAP
 test_end = (TRAIN_EXAMPLES + TEST_EXAMPLES) * SAMPLE_GAP
 # 产生仿真数据x  y 用于训练
@@ -130,6 +129,8 @@ train_x, train_y = generate_data(np.sin(np.linspace(0, test_start,
 test_x, test_y = generate_data(np.sin(np.linspace(test_start, test_end,
                                                   TEST_EXAMPLES, dtype=np.float32)))
 
+learn = tf.contrib.learn
+regressor = learn.Estimator(model_fn=lstm_model)
 regressor.fit(train_x, train_y, batch_size=BATCH_SIZE, steps=TRAINING_STEPS)
 predicted = [[pred] for pred in regressor.predict(test_x)]
 rmse = np.sqrt((predicted - test_y) ** 2).mean(axis=0)
@@ -139,13 +140,10 @@ plot_test = plt.plot(test_y, label="real_sin", color='blue')
 plt.legend = ([plot_predicted, plot_test], ['predicted', 'real_sin'])
 plt.show()
 
-# test_start = TRAIN_EXAMPLES * SAMPLE_GAP
-# test_end = (TRAINEXAMPLES + TEST_EXAMPLES) * SAMPLE_GAP
-# train_X, train_y = generate_data(np.sin(np.linspace(0, test_start, TRAIN_EXAMPLES, dtype=np.float32)))
-# test_X, test_y = generate_data(np.sin(np.linspace(test_start, test_end, TEST_EXAMPLES, dtype=np.float32)))
+
 # with tf.Session() as sess:
-#     train(sess, train_X, train_y)
-#     run_eval(test_X, test_y)
+#     train(sess, train_x, train_y)
+#     run_eval(test_x, test_y)
 '''
 ValueError: Expected input tensor Tensor("model/rnn/Const:0", shape=(), dtype=string) to have rank at least 2
 The error seems fairly clear, tf.nn.dynamic_rnn expects a 3-dimensional tensor as input (i.e. rank 3), 
