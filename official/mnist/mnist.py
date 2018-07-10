@@ -39,7 +39,7 @@ def create_model(data_format):
   and
   https://github.com/tensorflow/models/blob/master/tutorials/image/mnist/convolutional.py
 
-  But uses the tf.keras API.
+  But uses the tf.keraspratice API.
 
   Args:
     data_format: Either 'channels_first' or 'channels_last'. 'channels_first' is
@@ -48,7 +48,7 @@ def create_model(data_format):
       https://www.tensorflow.org/performance/performance_guide#data_formats
 
   Returns:
-    A tf.keras.Model.
+    A tf.keraspratice.Model.
   """
   if data_format == 'channels_first':
     input_shape = [1, 28, 28]
@@ -59,8 +59,8 @@ def create_model(data_format):
   l = tf.keras.layers
   max_pool = l.MaxPooling2D(
       (2, 2), (2, 2), padding='same', data_format=data_format)
-  # The model consists of a sequential chain of layers, so tf.keras.Sequential
-  # (a subclass of tf.keras.Model) makes for a compact description.
+  # The model consists of a sequential chain of layers, so tf.keraspratice.Sequential
+  # (a subclass of tf.keraspratice.Model) makes for a compact description.
   return tf.keras.Sequential(
       [
           l.Reshape(

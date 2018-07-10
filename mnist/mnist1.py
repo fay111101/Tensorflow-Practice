@@ -73,7 +73,6 @@ def influence1(input_sensor, reuse=False):
 
 '''训练模型的过程'''
 
-
 def train(mnist):
     x = tf.placeholder(tf.float32, [None, INPUT_NODE], name='x-input')  # 维度可以自动算出，也就是样本数
     y_ = tf.placeholder(tf.float32, [None, OUTPUT_NODE], name='y-input')

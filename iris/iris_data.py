@@ -41,10 +41,10 @@ def load_data(label_name='Species'):
     # Create a local copy of the training set.
 
 
-    # train_path = tf.keras.utils.get_file(fname=TRAIN_URL.split('/')[-1],
+    # train_path = tf.keraspratice.utils.get_file(fname=TRAIN_URL.split('/')[-1],
     #                                      origin=TRAIN_URL)
     train_path='./data/iris_training.csv'
-    # train_path now holds the pathname: ~/.keras/datasets/iris_training.csv
+    # train_path now holds the pathname: ~/.keraspratice/datasets/iris_training.csv
 
     # Parse the local CSV file.
     train = pd.read_csv(filepath_or_buffer=train_path,
