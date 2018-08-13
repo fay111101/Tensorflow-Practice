@@ -9,6 +9,9 @@
 """
 '''
 参考深度学习书籍自编码器
+https://blog.csdn.net/Vinsuan1993/article/details/81142855
+InternalError (see above for traceback): Blas GEMM launch failed : a.shape=(256, 784), b.shape=(784, 256), m=256, n=256, k=784
+	 [[Node: MatMul = MatMul[T=DT_FLOAT, transpose_a=false, transpose_b=false, _device="/job:localhost/replica:0/task:0/device:GPU:0"](_arg_Placeholder_0_0/_1, Variable/read)]]
 '''
 import numpy as np
 import sklearn.preprocessing
@@ -79,7 +82,8 @@ with tf.Session() as sess:
 
     # 看预测和实际的值是否相等
     # print(pred)
-    # tf.argmax就是返回最大的那个数值所在的下标
+    # tf.argmax就是返回最大的那个数值所在的下标,也就是返回概率最大的相应坐标是否相同，相同则为预测相同，不同则为预测不同
+    # tf.equal
     correct_prediction=tf.equal(tf.argmax(pred,axis=1),tf.argmax(y,axis=1))
     # 计算错误率
     accuracy=tf.reduce_mean(tf.cast(correct_prediction,dtype=np.float32))
@@ -109,5 +113,4 @@ with tf.Session() as sess:
     for i in range(show_num):
         a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
         a[1][i].imshow(np.reshape(reconstruction[i], (28, 28)))
-    plt.figure()
     plt.show()
