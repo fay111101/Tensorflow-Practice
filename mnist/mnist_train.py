@@ -8,10 +8,10 @@
 @Software: PyCharm
 """
 import os
+
+import mnist_inference
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
-import mnist_inference
 
 BATCH_SIZE = 100
 LEARNING_RATE_BASE = 0.8
@@ -19,7 +19,7 @@ LEARNING_RATE_DECAY = 0.99
 REGULARIZATION_RATE = 0.0001
 TRAINING_STEPS = 30000
 MOVING_AVERAGE_DECAY = 0.99
-MODEL_SAVE_PATH = "MNIST_model/"
+MODEL_SAVE_PATH = "./model/"
 MODEL_NAME = "mnist_model"
 
 
@@ -59,9 +59,11 @@ def train(mnist):
                 print("After %d training step(s), loss on training batch is %g." % (step, loss_value))
                 saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
 
+
 def main(argv=None):
-    mnist = input_data.read_data_sets("MINIST_data", one_hot=True)
+    mnist = input_data.read_data_sets("data", one_hot=True)
     train(mnist)
+
 
 if __name__ == '__main__':
     main()
