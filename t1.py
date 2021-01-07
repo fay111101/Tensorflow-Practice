@@ -76,8 +76,24 @@ def test1():
 
 
 if __name__ == '__main__':
-    tf.logging.set_verbosity(tf.logging.INFO)
-    tf.app.run(main)
-    tf.app.run(test)
+    # tf.logging.set_verbosity(tf.logging.INFO)
+    # tf.app.run(main)
+    # tf.app.run(test)
+
+    import tensorflow as tf
+
+    labels = [[0.2, 0.3, 0.5],
+              [0.1, 0.6, 0.3]]
+    logits = [[4, 1, -2],
+              [0.1, 1, 3]]
+
+    logits_scaled = tf.nn.softmax(logits)
+    result = tf.nn.softmax_cross_entropy_with_logits(labels=labels, logits=logits)
+    # result = tf.nn.softmax_cross_entropy_with_logits(labels=labels, logits=logits_scaled)
+
+    with tf.Session() as sess:
+        print(sess.run(logits_scaled))
+        print(sess.run(result))
+
     # test1()
 # loss=tf.add_n(tf.get_collection('losses'))
