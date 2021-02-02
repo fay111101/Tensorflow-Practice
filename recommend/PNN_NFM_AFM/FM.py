@@ -2,7 +2,7 @@
 # encoding: utf-8
 """
 @author: fay
-@contact: fayfeixiuhong@didiglobal.com
+@contact: fayfeixiuhong
 @software: pycharm
 @file: FM.py
 @time: 2019-11-06 14:35

@@ -2,7 +2,7 @@
 # encoding: utf-8
 """
 @author: fay
-@contact: fayfeixiuhong@didiglobal.com
+@contact: fayfeixiuhong
 @time: 2020-12-29 11:21
 @desc:
 """

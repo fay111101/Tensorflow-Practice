@@ -2,7 +2,7 @@
 # encoding: utf-8
 """
 @author: fay
-@contact: fayfeixiuhong@didiglobal.com
+@contact: fayfeixiuhong
 @software: pycharm
 @file: tfrecord_test.py
 @time: 2019-11-04 17:25
